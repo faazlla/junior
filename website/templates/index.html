@@ -86,7 +86,7 @@
                               <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
                               <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
                           </ul>
-                      {% elif junior.prosjecna_ocjena > 0 %}
+                      {% elif junior.prosjecna_ocjena <= 1.5 %}
                           <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
                               <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
                           </ul>
@@ -184,7 +184,7 @@
             <div class="col-lg-6">
               <div class="meeting-item">
                 <div class="thumb">
-                  <a href="{% url 'details' junior.id %}"><img src="{{ junior.image.url }}" alt="Online Teaching"></a>
+                  <a href="{% url 'details' junior.id %}"><img style="width: 100%; object-fit: cover; height: 350px; max-height: 350px;" src="{{ junior.image.url }}" alt="Online Teaching"></a>
                 </div>
                 <div class="down-content">
                   <a href="{% url 'details' junior.id %}" style="list-style: none; padding: 0; display: flex; justify-content: center;"><h4>{{ junior.ime_i_prezime }}</h4></a>
@@ -216,7 +216,7 @@
                         <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
                         <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
                     </ul>
-                {% elif junior.prosjecna_ocjena > 0 %}
+                {% elif junior.prosjecna_ocjena <= 1.5 %}
                     <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
                         <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
                     </ul>
