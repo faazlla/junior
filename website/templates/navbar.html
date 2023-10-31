@@ -1,0 +1,83 @@
+{%load static%} 
+
+<!-- Sub Header -->
+    <div class="sub-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-sm-8">
+                    <div class="left-content">
+                        <p><em>efazla96@gmail.com</em></p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <div class="right-icons">
+                        <ul>                      
+                        <li><a href="https://fazla-4598726e04fd.herokuapp.com/"><i class="fa fa-globe"></i></a></li>
+                        <li><a href="{% static 'FazlicEmir.pdf' %}"><i class="fa fa-download"></i></a></li>
+                        <li><a href="https://github.com/faazlla"><i class="fa fa-github"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/emir-fazlic-536112253/"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="https://www.instagram.com/faazlla/"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="{% url 'index'%}" class="logo">
+                            Junior
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="{% url 'index'%}" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="{% url 'joinus'%}">Join Us</a></li> 
+                            <li class="scroll-to-section"><a href="{% url 'logout'%}">LogOUT</a></li> 
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+    {% else %}
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="{% url 'index'%}" class="logo">
+                            Junior
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="{% url 'index'%}" class="active">Home</a></li>
+                            <li><a href="{% url 'register'%}">Registration</a></li>
+                            <li class="scroll-to-section"><a href="{% url 'login'%}">Login</a></li> 
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+    {% endif %}

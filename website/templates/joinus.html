@@ -1,0 +1,109 @@
+
+
+  
+  {%load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+    body {
+		background: linear-gradient(to right, rgb(0 0 0 / 50%), rgb(54 80 93 / 50%));
+    }
+
+	
+    
+</style>
+
+
+<body style="background-image: url('{% static 'assets/images/heading-bg.jpg' %}');">
+    
+
+    <section class="vh-100 bg-image">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 25px; margin: 0 auto; background: rgba(200, 200, 200, 0.9)">
+                            <div class="card-body p-5" style="display:flex; flex-direction:column; margin: 0 auto;">
+                                {% if existing_junior %}
+                                <h2>Edit Your Profile</h2>
+                                {% else %}
+                                <h2>Join as a Junior</h2>
+                                {% endif %}
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="text" name="ime_i_prezime" placeholder="Name and Surname" value="{{ existing_junior.ime_i_prezime }}" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <select class="form-select form-select-lg" name="primarni_jezik" required>
+                                            <option value="" disabled selected>Select Programming Language</option>
+                                            {% for language in languages %}
+                                            <option value="{{ language.id }}" {% if existing_junior and existing_junior.primarni_jezik.id == language.id %}selected{% endif %}>{{ language.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="email" name="email" placeholder="Email" value="{{ existing_junior.email }}" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="number" name="broj_telefona" placeholder="Phone Number" value="{{ existing_junior.broj_telefona }}" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="text" name="kratak_opis" placeholder="Description" value="{{ existing_junior.kratak_opis }}" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="text" name="dodatni_it_skilovi" placeholder="Skills" value="{{ existing_junior.dodatni_it_skilovi }}" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="url" name="git_link" placeholder="GitHUB" value="{{ existing_junior.git_link }}" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="url" name="linkedin_link" placeholder="Linkedin" value="{{ existing_junior.linkedin_link }}" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="url" name="portfolio_link" placeholder="Portfolio" value="{{ existing_junior.portfolio_link }}" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="file" name="pdf_cv" placeholder="CV (PDF)" required />
+                                    </div>
+    
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control form-control-lg" type="file" name="image" placeholder="Image" required />
+                                    </div>
+    
+                                    <div class="d-flex justify-content-center">
+                                        <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href="{% url 'index' %}" style="margin-right:10px;">BACK </a>
+                                        <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="submit">
+                                            {% if existing_junior %}SAVE ID={{ existing_junior.id }}{% else %}JOIN{% endif %}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+                                    
+
+</body>

@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block content%}
+
+  <section class="heading-page header-text" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h6>You find Me</h6>
+          <h2>I'm {{ junior.ime_i_prezime }}</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="meetings-page" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="meeting-single-item" id="kont_details" style="width: 550px; margin: 0 auto; margin-top: -250px;">
+                <div class="thumb">
+                  <img id="kont_details_img" style="width: 550px; object-fit: cover; height: 400px; max-height: 400px;" src="{{ junior.image.url }}" alt="{{ junior.ime_i_prezime }}"></a>
+                </div>
+                <div class="down-content">
+                  <h4 style="list-style: none; padding: 0; display: flex; justify-content: center;"><strong>{{ junior.ime_i_prezime }}</strong></h4></a>
+                  <p style="list-style: none; padding: 0; display: flex; justify-content: center;"><strong>{{ junior.primarni_jezik }}</strong></p>
+                  {% if junior.prosjecna_ocjena > 4.5 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% elif junior.prosjecna_ocjena > 3.5 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% elif junior.prosjecna_ocjena > 2.5 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% elif junior.prosjecna_ocjena > 1.5 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% elif junior.prosjecna_ocjena > 0 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% endif %}
+                      <div class="main-button-red">
+                        <a href="mailto:{{ junior.email }}">Hire ME</a>
+                        <a id="rate-button" style="color:white;">Rate ME</a>
+                      </div>
+                      {% if user.is_authenticated %}
+                      <div id="rating-form" style="display: none;">
+                        
+                        </BR><form id="ocjena-form" style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                            {% csrf_token %}
+                            <label for="ocjena" style="padding:15px;"><STRONG>RATE JUNIOR:</strong></label>
+                            <select id="ocjena" name="ocjena" style="margin:5px;">
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>
+                            <button type="submit" id="rate-button">RATE</button>
+                            
+                        </form>
+                      </div>
+                      {% endif %}
+                    
+                      
+                     
+                      
+        
+
+                  <p class="description">
+                    <strong>ABOUT ME </strong>
+                    
+                    <br><br>{{ junior.kratak_opis }}
+                  </p>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="hours">
+                        <h5>Details</h5>
+                        <p><strong>Name: </strong>{{ junior.ime_i_prezime }}<br>
+                            <strong>Email: </strong>{{ junior.email }}<br>
+                            <strong>Phone: </strong>{{ junior.broj_telefona }}</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="location">
+                        <h5>Skills</h5>
+                        <p><strong>Primary:</strong> {{ junior.primarni_jezik }}
+                        <br><strong>Other Skills:</strong> {{ junior.dodatni_it_skilovi }}</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="book now">
+                        <h5>Ratings</h5>
+                        <p><strong>Average: </strong>{{ junior.prosjecna_ocjena }}<br><strong>Ratings: </strong>{{ junior.broj_ocjena }}</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="share">
+                        <h5>Share:</h5>
+                        <ul>
+                            <li style="border-width:1px; border-color:black; border-style:solid; border-radius:50px; margin:2px; padding:10px;"><a href="{{ junior.pdf_cv.url}}" href="{% static 'FazlicEmir.pdf' %}">  <i class="fa fa-download"></i></a></li>
+                            <li style="border-width:1px; border-color:black; border-style:solid; border-radius:50px; margin:2px; padding:10px;"><a href="{{ junior.portfolio_link }}">  <i class="fa fa-globe"></i></a></li>
+                            <li style="border-width:1px; border-color:black; border-style:solid; border-radius:50px; margin:2px; padding:10px;"><a href="{{ junior.git_link }}">  <i class="fa fa-github"></i></a></li>
+                            <li style="border-width:1px; border-color:black; border-style:solid; border-radius:50px; margin:2px; padding:10px;"><a href="{{ junior.linkedin_link }}">   <i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                      </div>
+                      <ul style="margin-top: 40px;">
+                        <h4>REVIEW:</h4>
+                        {% for ocjena in ocjene %}
+                          <li>
+                            {% if ocjena.ocjena == 5 %}
+                            <ul style="list-style: none; padding: 0; display: flex; align-items: center;">
+                              <span><strong>'{{ ocjena.ocjenjivac.username }}'</strong> gives: </span>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                            </ul>
+
+                            {% elif ocjena.ocjena == 4 %}
+                            <ul style="list-style: none; padding: 0; display: flex; align-items: center;">
+                              <span><strong>'{{ ocjena.ocjenjivac.username }}'</strong> gives: </span>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              
+                            </ul>
+                            {% elif ocjena.ocjena == 3 %}
+                            <ul style="list-style: none; padding: 0; display: flex; align-items: center;">
+                              <span><strong>'{{ ocjena.ocjenjivac.username }}'</strong> gives: </span>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              
+                            </ul>
+                            {% elif ocjena.ocjena == 2 %}
+                            <ul style="list-style: none; padding: 0; display: flex; align-items: center;">
+                              <span><strong>'{{ ocjena.ocjenjivac.username }}'</strong> gives: </span>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              
+                            </ul>
+                            {% elif ocjena.ocjena == 1 %}
+                            <ul style="list-style: none; padding: 0; display: flex; align-items: center;">
+                              <span><strong>'{{ ocjena.ocjenjivac.username }}'</strong> gives </span>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+
+                            </ul>
+                            {% endif %}
+                          </li>
+                        {% empty %}
+                          <li>No reviews yet.</li>
+                        {% endfor %}
+                        
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="main-button-red">
+                <a href="{% url 'index'%}">Back</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+    document.getElementById('rate-button').addEventListener('click', function() {
+      document.getElementById('rating-form').style.display = 'block';
+    });
+
+    document.getElementById('ocjena-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      let ocjena = document.getElementById('ocjena').value;
+      fetch('{% url "rate_junior" junior.id %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: 'ocjena=' + ocjena
+      }).then(response => {
+        if (response.ok) {
+          location.reload(); // Osvježi stranicu nakon što se ocjena uspješno spremljena
+        }
+      });
+    });
+  </script>
+
+{% endblock %}

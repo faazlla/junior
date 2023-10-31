@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block content%}
+
+<style>
+   button, input,  optgroup, select, textarea {
+    margin: 0PX;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    height: 35px;
+    width: 180px;
+}
+
+</style>
+
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <section class="section main-banner" id="top" data-section="section1">
+      <video autoplay muted loop id="bg-video">
+          <source src=" {% static 'assets/images/course-video.mp4' %} " type="video/mp4" />
+      </video>
+
+      <div class="video-overlay header-text">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="caption">
+                  <h6>Hello Juniors,</h6>
+                  <h2>Welcome to our platform</h2>
+                  {% if user.is_authenticated%}
+                  <div class="main-button-red">
+                    <div class="scroll-to-section"><a href="joinus">Join Us Now!</a></div>
+                  </div>
+                  {%else%}
+                  <div class="main-button-red">
+                    <div class="scroll-to-section"><a href="login">Join Us Now!</a></div>
+                  </div>
+                  {%endif%}
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </section>
+  <!-- ***** Main Banner Area End ***** -->
+
+  <section class="services">
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-service-item owl-carousel">
+            {% if juniori %}
+              {% for junior in juniori|slice:5 %}
+              <div class="item" style="text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                <a href="{% url 'details' junior.id %}"><img style="width: 100%; object-fit: cover; height: 200px; max-height: 200px;" src="{{ junior.image.url }}" alt="Course One"></a>
+                <div class="down-content">
+                    <h4 href="{% url 'details' junior.id %}" style="margin-bottom: 10px;">{{ junior.ime_i_prezime }} </h4>
+                    <h6 style="margin-bottom: 10px;">{{ junior.primarni_jezik }} </h6>
+                    <div class="info">
+                      {% if junior.prosjecna_ocjena > 4.5 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% elif junior.prosjecna_ocjena > 3.5 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% elif junior.prosjecna_ocjena > 2.5 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% elif junior.prosjecna_ocjena > 1.5 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% elif junior.prosjecna_ocjena > 0 %}
+                          <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                              <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          </ul>
+                      {% endif %}
+
+                    </div>
+                </div>
+              </div>
+              {%endfor%}
+            {% else %}
+            <div class="item" style="text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+              <img style="width: 100%; object-fit: cover; height: 200px; max-height: 200px;" src="{% static 'assets/images/heading-bg.jpg' %}" alt="Course One">
+              <div class="down-content">
+                  <h4 style="margin-bottom: 10px;">NO RESULTS</h4>
+                  <div class="info">
+                      <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                          <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                          <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+            {%endif%}
+
+          
+
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="upcoming-meetings" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12"></br></br></br>
+          <div class="section-heading">
+            <h2>You Find Us</h2>
+          </div>
+        </div>
+      
+
+        <div class="col-lg-4">
+          <div class="categories">
+              <h4><STRONG>CATEGORIES</STRONG></h4>
+                
+                <form method="GET" action="{% url 'index' %}">
+                  <div class="form-group">
+                      <div class="caption">
+                        <h6><strong>PRIMARY LANGUAGE:</strong></h6>
+                      </div>
+                      {{ form.Language }}
+                  </div></br>
+                  
+                  <div class="caption" style="list-style: none; padding: 0; display: flex;">
+                    <h6><strong>STARS:</strong></h6>
+                    <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                  </div>
+                  <div class="form-group" style="list-style: none; padding: 0; display: flex;">
+                    
+                    {{ form.Rating }}
+                    
+                  </div></br>
+
+                  <div class="form-group">
+                    <div class="caption">
+                        <h6><strong>NUMBER OF RATINGS:</strong></h6>
+                    </div>
+                    <input type="number" name="NumRatings" min="0" placeholder="Min. num. of ratings" required>
+                  </div>
+
+                  <div class="main-button-red">
+
+                    <button type="submit" class="btn btn-primary" style="background:#184d18; background-color: rgb(19, 85, 22);
+                    border-color: #14651a; border-radius:40px;     font-family: 'Poppins', sans-serif;"><STRONG>SEARCH!</strong></button>
+                  </div>
+                </form>
+              
+              
+          </div>
+        </div>
+        
+        <div class="col-lg-8">
+          <div class="row">
+            {% for junior in juniori %}
+            <div class="col-lg-6">
+              <div class="meeting-item">
+                <div class="thumb">
+                  <a href="{% url 'details' junior.id %}"><img src="{{ junior.image.url }}" alt="Online Teaching"></a>
+                </div>
+                <div class="down-content">
+                  <a href="{% url 'details' junior.id %}" style="list-style: none; padding: 0; display: flex; justify-content: center;"><h4>{{ junior.ime_i_prezime }}</h4></a>
+                  <a href="{% url 'details' junior.id %}" style="list-style: none; padding: 0; display: flex; justify-content: center;"><h4>{{ junior.primarni_jezik }}</h4></a>
+                  
+                  {% if junior.prosjecna_ocjena > 4.5 %}
+                    <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    </ul>
+                {% elif junior.prosjecna_ocjena > 3.5 %}
+                    <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    </ul>
+                {% elif junior.prosjecna_ocjena > 2.5 %}
+                    <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    </ul>
+                {% elif junior.prosjecna_ocjena > 1.5 %}
+                    <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    </ul>
+                {% elif junior.prosjecna_ocjena > 0 %}
+                    <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                        <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    </ul>
+                {% endif %}
+                </div>
+              </div>
+            </div>
+            {% empty %}
+              <div class="col-lg-6">
+                <div class="meeting-item">
+                  <div class="thumb">
+                    <a href=" # "><img src=" {% static 'assets/images/heading-bg.jpg' %} " alt="Online Teaching"></a>
+                  </div>
+                  <div class="down-content">
+                    <a href=" # " style="list-style: none; padding: 0; display: flex; justify-content: center;"><h4>NO RESULTS</h4></a>
+                    
+                    <ul style="list-style: none; padding: 0; display: flex; justify-content: center;">
+                      <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                      <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                      <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                      <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                      <li style="margin: 0 5px;"><i class="fa fa-star"></i></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+{% endblock %}
